@@ -1,0 +1,78 @@
+$primary: #009EF7;
+$secondary: #7e8299;
+$success: #00A558;
+$info: #B9B9B9;
+$warning: #F39C11;
+$danger: #DD4B3C;
+
+// color
+.primary-color{ color: $primary !important;}
+.secondary-color{ color: $secondary !important;}
+.success-color{ color: $success !important;}
+.info-color{ color: $info !important;}
+.warning-color{ color: $warning !important;}
+.danger-color{ color: $danger !important;}
+
+
+// Background
+.primary-bg{ background-color: $primary !important;}
+.secondary-bg{ background-color: $secondary !important;}
+.success-bg{ background-color: $success !important;}
+.info-bg{ background-color: $info !important;}
+.warning-bg{ background-color: $warning !important;}
+.danger-bg{ background-color: $danger !important;}
+
+
+.flex-1{ flex: 1}
+.full-width{ width: 100%; }
+.full-height{ height: 100%; }
+.full-parent{ width: 100%; height: 100%;}
+.txt-overflow{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+// Form
+.invalid-message{
+    @extend .danger-color;
+    margin: 8px 0 0 0;
+}
+
+
+// Pope
+.ngxp__container{
+    background: #fff;
+    border-radius: 2px !important;
+    border: 1px solid #eff2f5 !important;
+    box-shadow: 0 0 1px rgb(0 0 0 / 20%) !important;
+    padding: 0 !important;
+}
+app-zoom-image .ngxp__container{
+    z-index: 99 !important;
+}
+// Spacing
+.mt-4px{ margin-top: 4px !important;}
+.mt-8px{ margin-top: 8px !important;}
+.mt-16px{ margin-top: 16px !important;}
+
+.mb-4px{ margin-bottom: 4px !important;}
+.mb-8px{ margin-bottom: 8px !important;}
+.mb-16px{ margin-bottom: 16px !important;}
+
+
+.btn{
+    white-space: nowrap;
+}
+.btn.danger-btn.btn-active-color-primary:hover:not(.btn-active) .svg-icon{
+    color: $danger !important;
+}
+.btn:disabled{
+    opacity: 0.6;
+    cursor: not-allowed !important;
+}
+
+.mat-icon.mat-accent{
+    color: $danger !important;
+}

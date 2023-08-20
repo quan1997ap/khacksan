@@ -1,0 +1,104 @@
+// https://github.com/DanielYKPan/date-time-picker/issues/269
+// https://stackoverflow.com/questions/58320916/angular-owl-date-time-picker-labels-and-buttons-not-localized
+@import "./base-config.scss";
+$week-fontsize: 14px;
+$day-fontsize: 14px;
+.owl-date-wrap{
+    display: flex;
+    position: relative;
+    &.full-width{
+        width: 100%;
+    }
+    mat-datepicker-toggle{
+        button{
+            position: absolute;
+            right: 0;
+            width: 36px;
+            height: 36px;
+            &:active, &:focus, &.cdk-program-focused{
+                background-color: transparent !important;
+            }
+        }
+    }
+    mat-icon{
+        position: absolute;
+        right: 6px;
+        top: 6px;
+        color: #757575;
+    }
+    .clear-date{
+        position: absolute;
+        right: 35px !important;
+        top: 8px !important;
+        color: #757575;
+        font-size: 16px;
+        font-weight: 400;
+        color: #999999;
+        display: inline-block;
+        font-size: 18px;
+        line-height: 1;
+        cursor: pointer;
+        &:hover{
+            color: #D0021B !important;
+        }
+    }
+    .clear-date-btn{
+        position: absolute;
+        right: 35px !important;
+        top: 8px !important;
+        color: #757575;
+        font-size: 16px;
+        font-weight: 400;
+        color: #999999;
+        display: inline-block;
+        font-size: 18px !important;
+        line-height: 1;
+        cursor: pointer;
+        background: transparent;
+        border: none;
+        &:hover{
+            color: #D0021B !important;
+        }
+    }
+    .form-control[readonly] {
+        background-color: transparent;
+    }
+    .form-control:disabled{
+        background-color: #EFF2F5 !important;
+    }
+}
+
+owl-date-time-calendar{
+    .owl-dt-calendar-control{
+        font-size: 14px !important;
+        padding-top: 16px !important;
+    }
+    .owl-dt-weekdays{ 
+        font-size: $week-fontsize !important;
+    }
+    .owl-dt-calendar-cell-content{
+        font-size: $day-fontsize !important;
+    }
+    .owl-dt-calendar-table .owl-dt-calendar-cell-selected{
+        color: #fff !important;
+        background-color: $primary !important;
+    }
+    .owl-dt-control .owl-dt-control-content{
+        font-size: 16px;
+    }
+    .owl-dt-calendar-table .owl-dt-calendar-header .owl-dt-weekdays th{
+        font-size: 14px !important;
+        padding-bottom: 8px !important;
+        padding-top: 8px !important;
+    }
+    .owl-dt-calendar-table .owl-dt-calendar-cell{
+        min-width: 40px;
+    }
+}
+.owl-dt-inline-container, .owl-dt-popup-container{
+    width: fit-content !important;
+    .owl-dt-calendar{
+        height: fit-content !important;
+        min-width: 300px !important;
+    }
+}

@@ -1,0 +1,189 @@
+<div class="listing-container">
+  <!-- listing-page-sticky-header  +  toolbar-space: 60= 2*30 (padding page) -->
+  <div id="kt_toolbar" class="toolbar">
+    <form [formGroup]="filterForm"  class="page-sticky-header d-flex flex-column"
+      [ngStyle]="{ 'height': toolbarHeight + 'px', 'overflow': toolbarHeight == toolbarHeightFull ? 'inherit' : 'hidden' }">
+      <div class="search-form-container">
+        <div class="search-form" >
+          <mat-form-field class="cb-input" appearance="fill" style="width: 400px; margin-right: 12px;">
+            <mat-icon matPrefix svgIcon="cb_search"></mat-icon>
+            <input matInput type="text" formControlName="textSearch" placeholder="Nhập loại phòng" autocomplete="off"
+              maxlength="250">
+          </mat-form-field>
+        </div>
+        <div class="..ml-2">
+          <button type="button" class="btn btn-primary btn-sm me-2" (click)="getReport(true)"
+            [disabled]="isLoadingTable">
+            <mat-icon svgIcon="cb_export"></mat-icon>
+            Xuất file
+          </button>
+          <button type="button" class="btn btn-success dropdown-toggle btn-sm" style="margin-right: 8px;"
+            (click)="showFilter()" [disabled]="isLoadingTable">
+            <mat-icon svgIcon="cb_filter"></mat-icon>
+            Lọc dữ liệu <sup>(+)</sup> &nbsp;
+          </button>
+        </div>
+      </div>
+      <div class="filter-form-container">
+        <div class="row mb-4 filter-form-control">
+          <div class="col-form-label fw-bold fs-6">
+            Thời gian đặt từ ngày
+          </div>
+          <div class="col-lg-12 fv-row">
+            <div class="owl-date-wrap full-width">
+              <input [owlDateTime]="dtFrom" [max]="today" [owlDateTimeTrigger]="dtFrom" placeholder="DD/MM/YYYY"
+                class="form-control cb-input form-control-sm " formControlName="fromDate" readonly>
+              <mat-icon matPrefix svgIcon="cb_date" color="picker-icon"></mat-icon>
+              <span class="clear-date" matPrefix *ngIf="filterForm.value.fromDate"
+                (click)="filterForm.controls.fromDate.reset()">×</span>
+              <owl-date-time #dtFrom [pickerType]="'calendar'"></owl-date-time>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row mb-4 filter-form-control">
+          <div class="col-form-label fw-bold fs-6">
+            Đến ngày
+          </div>
+          <div class="col-lg-12 fv-row">
+            <div class="owl-date-wrap full-width">
+              <input [owlDateTime]="dtTo" [owlDateTimeTrigger]="dtTo" placeholder="Date Time" placeholder="DD/MM/YYYY"
+                class="form-control cb-input form-control-sm" formControlName="toDate" readonly>
+              <span class="clear-date" matPrefix *ngIf="filterForm.value.toDate"
+                (click)="filterForm.controls.toDate.reset()">×</span>
+              <mat-icon matSuffix svgIcon="cb_date" color="picker-icon"></mat-icon>
+              <owl-date-time #dtTo [pickerType]="'calendar'"></owl-date-time>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-4 filter-form-control">
+          <div class="col-form-label fw-bold fs-6">
+           Kênh đặt
+          </div>
+          <div class="col-lg-12 fv-row">
+            <ng-select [items]="bookingFroms" class="form-select-control form-selection-sm"
+              formControlName="customerType" bindLabel="name" bindValue="id" placeholder="Chọn nhóm KH">
+            </ng-select>
+          </div>
+        </div>
+
+        <div class="row mb-4 filter-form-control">
+          <div class="col-form-label fw-bold fs-6">
+            Loại phòng
+          </div>
+          <div class="col-lg-12 fv-row">
+            <ng-select [items]="roomTypes" class="form-select-control form-selection-sm" formControlName="branch"
+              bindLabel="name" bindValue="id" placeholder="Chọn chi nhánh">
+            </ng-select>
+          </div>
+        </div>
+
+      </div>
+    </form>
+  </div>
+  <div [ngStyle]="{ 'height': (toolbarHeight + LAYOUT_CONFIG.STICKY_SPACE ) + 'px' }" class="toolbar-space"> &nbsp;
+  </div>
+
+
+  <!-- Table -->
+  <div class="table-container" style="width: 100%; overflow: overlay;">
+    <ng-template #CellLoading>
+      <div class="ph-item table-cell-loading">
+        <div class="ph-picture table-cell-loading-inner"></div>
+      </div>
+    </ng-template>
+
+    <!-- ngx-pagination config :  paginate:  { itemsPerPage: pageSize, currentPage: currentPage, totalItems: totalItems }  -->
+    <table mat-table
+      [dataSource]="newses | paginate: { itemsPerPage: pageSize, currentPage: currentPage, totalItems: totalItems } "
+      class="cbbank-table full-width-table">
+      <ng-container matColumnDef="{{column}}" *ngFor="let column of listingService.getColumnName(displayedColumns)"
+        [stickyEnd]="isSticky(column)">
+        <!-- Table header -->
+        <ng-container [ngSwitch]="column">
+          <!-- Normal header -->
+          <ng-container *ngSwitchCase="'action'">
+            <th mat-header-cell *matHeaderCellDef [width]="displayedColumns[column].width"
+              [ngStyle]="{'min-width': displayedColumns[column].minWidth,  'max-width': displayedColumns[column].maxWidth }">
+              <div class="header-inner" style="width: 100% !important; max-width: unset; text-align: center;">
+                <div class="header-name" matTooltipAuto [matTooltipPosition]="'above'" [matTooltipShowDelay]="200"
+                  matTooltip="{{displayedColumns[column].title}}">{{displayedColumns[column].title}}</div>
+              </div>
+            </th>
+          </ng-container>
+          <!-- Sorting header -->
+          <ng-container *ngSwitchDefault>
+            <th mat-header-cell *matHeaderCellDef [ngClass]="{'current-sort': currentSort === column }"
+              [width]="displayedColumns[column].width"
+              [ngStyle]="{'min-width': displayedColumns[column].minWidth,  'max-width': displayedColumns[column].maxWidth }">
+              <div class="header-inner">
+                <div class="header-name" matTooltipAuto [matTooltipPosition]="'above'" [matTooltipShowDelay]="200"
+                  matTooltip="{{displayedColumns[column].title}}">{{displayedColumns[column].title}}</div>
+                <span class="svg-icon svg-icon-3 sort-icon" [ngClass]="{'active': column == currentSort }"
+                  (click)="tableSort(column)" *ngIf="displayedColumns[column].sort"
+                  [inlineSVG]="displayedColumns[column].sort == 'asc' ? './assets/media/icons/duotune/arrows/arr003.svg' : './assets/media/icons/duotune/arrows/arr004.svg' ">
+                </span>
+              </div>
+            </th>
+          </ng-container>
+        </ng-container>
+
+        <!-- Table body -->
+        <td mat-cell *matCellDef="let row" [width]="displayedColumns[column].width"
+          [ngStyle]="{'min-width': displayedColumns[column].minWidth,  'max-width': displayedColumns[column].maxWidth }">
+          <ng-container [ngSwitch]="column" *ngIf="!isLoadingTable; else CellLoading;">
+
+            <ng-container *ngSwitchCase="['createdAt', 'updatedAt'].includes(column) ? column : null ">
+              {{ row | nestedKey: column | date: 'dd/MM/yyyy HH:mm' }}
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'status'">
+              <div *ngIf="row.status == 1" class="status success-color d-flex"> <span class="success-bg dot"></span>
+                Hiển thị </div>
+              <div *ngIf="row.status == 0" class="status secondary-color d-flex"> <span class="secondary-bg dot"></span>
+                Đã ẩn </div>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'avatar'">
+              <img class="avatar" src="{{row.avatar}}" style="margin-right: 20px;" alt="avatar" srcset="">
+            </ng-container>
+
+            <ng-container *ngSwitchCase="['title', 'description'].includes(column) ? column : null ">
+              <div class="d-flex w-100 h-100 justify-content-start long-text">
+                <div class="max-4-lines" matTooltipAuto [matTooltipPosition]="'below'" [matTooltipShowDelay]="200"
+                  matTooltip="{{ row | nestedKey: column  }}">
+                  {{ row | nestedKey: column }}
+                </div>
+              </div>
+            </ng-container>
+
+
+            <ng-container *ngSwitchDefault>
+              <div class="txt-overflow table-cell-default" matTooltipAuto [matTooltipPosition]="'below'"
+                [matTooltipShowDelay]="200" matTooltip="{{ row | nestedKey: column  }}"> {{ row | nestedKey: column }}
+              </div>
+            </ng-container>
+
+          </ng-container>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="listingService.getColumnName(displayedColumns);" [style.height.px]="40"></tr>
+      <tr mat-row *matRowDef="let row; columns: listingService.getColumnName(displayedColumns);" [style.height.px]="60">
+      </tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td [attr.colspan]="listingService.getColumnName(displayedColumns)?.length" class="table-empty-message">
+          Không tìm thấy kết quả nào
+        </td>
+      </tr>
+
+    </table>
+  </div>
+  <ng-container *ngIf="totalItems > 0">
+    <cbbank-pagination [total]="totalItems" [currentPage]="currentPage" [itemPerPage]="pageSize"
+      (pageChange)="pageChanged($event)" (itemPerPageChange)="itemPerPageChange($event)">
+    </cbbank-pagination>
+  </ng-container>
+</div>

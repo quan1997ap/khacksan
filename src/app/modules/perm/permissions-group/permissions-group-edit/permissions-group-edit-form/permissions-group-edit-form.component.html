@@ -1,0 +1,170 @@
+<form [formGroup]="permGroupForm" class="row">
+
+    <div class="col-4 mb-2">
+        <label class="col-form-label fw-bold fs-6">
+            <span class="required">Phạm vi phân quyền</span>
+        </label>
+        <div class="fv-row">
+            <ng-select [items]="types" class="form-select-control form-selection-sm " [bindLabel]="'name'"
+                [bindValue]="'id'" formControlName="type" [searchable]="true" [virtualScroll]="true">
+            </ng-select>
+            <validation-message [controlName]="'Phạm vi phân quyền'"
+                [control]="permGroupForm.get('type')"></validation-message>
+        </div>
+    </div>
+
+    <div class="col-4 mb-2">
+        <label class="col-form-label fw-bold fs-6">
+            <span class="required">Mã nhóm quyền</span>
+        </label>
+        <div class="fv-row">
+            <input type="text" formControlName="code" autocomplete="off"
+                class="form-control cb-input form-control-sm form-control-solid view-when-disabled" />
+            <validation-message [controlName]="'Mã nhóm quyền'"
+                [control]="permGroupForm.get('code')"></validation-message>
+        </div>
+    </div>
+
+    <div class="col-4 mb-2">
+        <label class="col-form-label fw-bold fs-6">
+            <span class="required">Loại nhóm quyền </span>
+        </label>
+        <div class="fv-row">
+            <ng-select [items]="applyTypes" class="form-select-control form-selection-sm " [bindLabel]="'name'"
+                [bindValue]="'id'" formControlName="applyType" [searchable]="true" [virtualScroll]="true">
+            </ng-select>
+            <validation-message [controlName]="'Loại nhóm quyền'"
+                [control]="permGroupForm.get('applyType')"></validation-message>
+        </div>
+    </div>
+
+    <div class="col-4 mb-2">
+        <label class="col-form-label fw-bold fs-6">
+            <span class="required">Tên nhóm quyền</span>
+        </label>
+        <div class="fv-row">
+            <input type="text" formControlName="name" autocomplete="off"
+                class="form-control cb-input form-control-sm form-control-solid view-when-disabled" />
+            <validation-message [controlName]="'Tên nhóm quyền'"
+                [control]="permGroupForm.get('name')"></validation-message>
+        </div>
+    </div>
+
+    <div class="col-4 mb-2">
+        <label class="col-form-label fw-bold fs-6">
+            <span class="required">Phòng ban</span>
+        </label>
+        <div class="fv-row">
+            <ng-select [items]="departments" class="form-select-control form-selection-sm " [bindLabel]="'name'"
+                [bindValue]="'id'" formControlName="departmentIds" [searchable]="true" [virtualScroll]="true">
+            </ng-select>
+            <validation-message [controlName]="'Loại nhóm quyền'"
+                [control]="permGroupForm.get('departmentIds')"></validation-message>
+        </div>
+    </div>
+
+    <div class="col-4 mb-2">
+        <label class="col-form-label fw-bold fs-6">
+            <span class="required">Đơn vị</span>
+        </label>
+        <div class="fv-row">
+            <ng-select [items]="branchs" class="form-select-control form-selection-sm " [bindLabel]="'name'"
+                [bindValue]="'id'" formControlName="branchIds" [searchable]="true" [virtualScroll]="true">
+            </ng-select>
+            <validation-message [controlName]="'Đơn vị'"
+                [control]="permGroupForm.get('branchIds')"></validation-message>
+        </div>
+    </div>
+
+    <div class="col-4 mb-2">
+        <label class="col-form-label fw-bold fs-6">
+            <span class="required">Chức danh</span>
+        </label>
+        <div class="fv-row">
+            <ng-select [items]="positions" class="form-select-control form-selection-sm " [bindLabel]="'name'"
+                [bindValue]="'id'" formControlName="positionIds" [searchable]="true" [virtualScroll]="true">
+            </ng-select>
+            <validation-message [controlName]="'Chức danh'"
+                [control]="permGroupForm.get('positionIds')"></validation-message>
+        </div>
+    </div>
+
+
+    <div class="col-4 mb-2">
+        <label class="col-form-label fw-bold fs-6">
+            <span>Mô tả</span>
+        </label>
+        <div class="fv-row">
+            <input type="text" formControlName="description" autocomplete="off"
+                class="form-control cb-input form-control-sm form-control-solid view-when-disabled" />
+            <validation-message [controlName]="'Mô tả'"
+                [control]="permGroupForm.get('description')"></validation-message>
+        </div>
+    </div>
+
+
+    <div class="col-4 mb-2">
+        <label class="col-form-label fw-bold fs-6">
+            <span class="required">Trạng thái</span>
+        </label>
+        <div class="fv-row">
+            <div class="form-check form-switch form-check-custom form-check-solid">
+                <input formControlName="status" class="form-check-input" type="checkbox">
+                &nbsp;&nbsp;
+                <div *ngIf="permGroupForm.controls['status'].value == true" class="status success-color"> Hoạt động
+                </div>
+                <div *ngIf="permGroupForm.controls['status'].value == false" class="status secondary-color"> Ngưng hoạt
+                    động </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-3 mb-2">
+        <label class="col-form-label fw-bold fs-6">
+            <span>Người tạo</span>
+        </label>
+        <div class="fv-row">
+            <input type="text" readonly formControlName="createdBy" class="form-control cb-input form-control-sm " />
+        </div>
+    </div>
+
+    <div class="col-3 mb-2">
+        <label class="col-form-label fw-bold fs-6">
+            <span>Ngày tạo</span>
+        </label>
+        <div class="fv-row">
+            <div class="owl-date-wrap full-width">
+                <input [owlDateTime]="dtCreatedAt" placeholder="DD/MM/YYYY"
+                    class="form-control cb-input form-control-sm " formControlName="createdAt" readonly>
+                <mat-icon matPrefix svgIcon="cb_date" color="picker-icon"></mat-icon>
+                <owl-date-time #dtCreatedAt [pickerType]="'calendar'"></owl-date-time>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-3 mb-2">
+        <label class="col-form-label fw-bold fs-6">
+            <span>Người sửa</span>
+        </label>
+        <div class="fv-row">
+            <input type="text" readonly formControlName="createdBy" class="form-control cb-input form-control-sm " />
+        </div>
+    </div>
+
+    
+    <div class="col-3 mb-2">   
+        <label class="col-form-label fw-bold fs-6">
+            <span>Ngày sửa</span>
+        </label>
+        <div class="fv-row">
+            <div class="owl-date-wrap full-width">
+                <input [owlDateTime]="dtCreatedAt" placeholder="DD/MM/YYYY"
+                    class="form-control cb-input form-control-sm " formControlName="createdAt" readonly>
+                <mat-icon matPrefix svgIcon="cb_date" color="picker-icon"></mat-icon>
+                <owl-date-time #dtCreatedAt [pickerType]="'calendar'"></owl-date-time>
+            </div>
+        </div>
+    </div>
+
+</form>

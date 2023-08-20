@@ -1,0 +1,55 @@
+$checkbox-bg-default:  #a1a5b7;
+$checkbox-bg-checked:  #009ef7;
+
+.checkbox-readonly-container{
+    padding-top: 8px;
+    position: relative;
+    &::before{
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 9;
+        cursor: not-allowed;
+    }
+}
+.mat-checkbox-disabled .mat-checkbox-layout{
+    cursor: not-allowed !important;
+}
+.mat-checkbox-inner-container{
+    height: 22px !important;
+    width: 22px !important;
+}
+.mat-checkbox-frame{
+    border-radius: 4px !important;
+    border-width: 0 !important;
+    background-color: $checkbox-bg-default !important;
+}
+.mat-checkbox-disabled{
+    cursor: not-allowed !important;
+    &:not(.mat-checkbox-checked) .mat-checkbox-frame{
+        border-color: $checkbox-bg-default;
+        background: $checkbox-bg-default;
+    }
+    &.mat-checkbox-checked .mat-checkbox-background{
+        background-color: #a1a5b7 !important;
+    }
+    &.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+        background-color: #a1a5b7 !important;
+    }
+}
+
+.mat-checkbox-checked{
+    .mat-checkbox-background{
+        background-color: #009ef7 !important; 
+    }
+}
+
+.md-checkbox-no-focused .md-container:before {
+    background-color: transparent !important;
+}
+
+// Disable animation when check/uncheck
+.mat-checkbox-ripple .mat-ripple-element {
+    background-color: transparent !important;
+}

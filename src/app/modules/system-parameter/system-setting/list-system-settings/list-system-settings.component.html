@@ -1,0 +1,97 @@
+<div class="listing-container">
+  
+    <!-- Table -->
+    <div class="table-container"
+    [ngStyle]="{ 'margin-top': toolbarHeight + 'px', 'overflow': 'overlay',  'width': '100%'  }" >
+      <ng-template #CellLoading>
+        <div class="ph-item table-cell-loading" >
+          <div class="ph-picture table-cell-loading-inner"></div>
+        </div>
+      </ng-template>
+  
+      <!-- ngx-pagination config :  paginate:  { itemsPerPage: pageSize, currentPage: currentPage, totalItems: totalItems }  -->
+      <table mat-table
+        [dataSource]="systemSettings"
+        class="cbbank-table full-width-table">
+        <ng-container matColumnDef="{{column}}" 
+          *ngFor="let column of listingService.getColumnName(displayedColumns)"
+          [stickyEnd]="isSticky(column)"
+        >
+          <!-- Table header -->
+          <ng-container [ngSwitch]="column">
+            <!-- Normal header -->
+            <ng-container *ngSwitchCase="'action'">
+              <th mat-header-cell *matHeaderCellDef  
+              [width]="displayedColumns[column].width" [ngStyle]="{'min-width': displayedColumns[column].minWidth,  'max-width': displayedColumns[column].maxWidth }">
+                <div class="header-inner" style="width: 100% !important; max-width: unset; text-align: center;" >
+                  <div class="header-name" matTooltipAuto [matTooltipPosition]="'above'" [matTooltipShowDelay]="200" matTooltip="{{displayedColumns[column].title}}" >{{displayedColumns[column].title}}</div>
+                </div>
+              </th>
+            </ng-container>
+            <!-- Sorting header -->
+            <ng-container *ngSwitchDefault>
+              <th mat-header-cell *matHeaderCellDef 
+              [width]="displayedColumns[column].width" [ngStyle]="{'min-width': displayedColumns[column].minWidth,  'max-width': displayedColumns[column].maxWidth }">
+                <div class="header-inner">
+                  <div class="header-name" matTooltipAuto [matTooltipPosition]="'above'" [matTooltipShowDelay]="200" matTooltip="{{displayedColumns[column].title}}" >{{displayedColumns[column].title}}</div>
+                </div>
+              </th>
+            </ng-container>
+          </ng-container>
+  
+          <!-- Table body -->
+          <td mat-cell *matCellDef="let row"
+          [width]="displayedColumns[column].width" [ngStyle]="{'min-width': displayedColumns[column].minWidth,  'max-width': displayedColumns[column].maxWidth }"
+          >
+            <ng-container [ngSwitch]="column" *ngIf="!isLoadingTable; else CellLoading;">
+  
+              <ng-container *ngSwitchCase="['createdAt', 'updatedAt'].includes(column) ? column : null ">
+                {{ row | nestedKey: column |  date: 'dd/MM/yyyy HH:mm' }}
+              </ng-container>
+
+              <ng-container *ngSwitchCase="['settingValue'].includes(column) ? column : null ">
+                <ng-container *ngIf="['uploadFileTypes', 'pageSizes'].includes(row['settingKey']); else Other" >
+                  <span class="badge py-3 px-4 fs-7 badge-light-primary me-1" *ngFor="let val of row[column]" >
+                    {{val}}
+                  </span>
+                </ng-container>
+                <ng-template #Other>
+                  <div class="txt-overflow table-cell-default" matTooltipAuto [matTooltipPosition]="'below'" [matTooltipShowDelay]="200" matTooltip="{{ row | nestedKey: column  }}" >   {{ row | nestedKey: column  }} </div>
+                </ng-template>
+              </ng-container>
+
+              
+              <ng-container *ngSwitchCase="'action'">
+                <div style="display: flex; justify-content: center;">
+  
+                  <button type="button" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" [matTooltipPosition]="'below'" [matTooltipShowDelay]="200" matTooltip="Sửa"
+                  (click)="editSystemSetting(row)"
+                  *ngxPermissionsOnly="PERMISSIONS['system_settings:update'].code"  
+                  >
+                    <span class="svg-icon svg-icon-3"  [inlineSVG]="'./assets/media/icons/duotune/art/art005.svg'">
+                    </span>
+                  </button>
+  
+                </div>
+              </ng-container>
+              
+              <ng-container *ngSwitchDefault>
+                <div class="txt-overflow table-cell-default" matTooltipAuto [matTooltipPosition]="'below'" [matTooltipShowDelay]="200" matTooltip="{{ row | nestedKey: column  }}" >   {{ row | nestedKey: column  }} </div>
+              </ng-container>
+  
+            </ng-container>
+          </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="listingService.getColumnName(displayedColumns);" [style.height.px]="40"></tr>
+        <tr mat-row *matRowDef="let row; columns: listingService.getColumnName(displayedColumns);" [style.height.px]="60" ></tr>   
+        <tr class="mat-row" *matNoDataRow >
+          <td [attr.colspan]="listingService.getColumnName(displayedColumns).length" class="table-empty-message" >
+            Không tìm thấy kết quả nào
+          </td>
+        </tr>
+        
+      </table>
+    </div>
+</div>
+  

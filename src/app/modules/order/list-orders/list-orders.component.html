@@ -1,0 +1,171 @@
+<div class="listing-container">
+  <!-- listing-page-sticky-header  +  toolbar-space: 60= 2*30 (padding page) -->
+  <div id="kt_toolbar" class="toolbar" style=" flex-direction: column; align-items: flex-start;">
+    <div class="page-sticky-header d-flex justify-content-between flex-column"
+      [ngStyle]="{ 'height': toolbarHeight + 'px', 'overflow': toolbarHeight == toolbarHeightFull ? 'inherit' : 'hidden' }">
+      <div class="sub-header">
+        <div class="d-flex ml-2 ">
+          <button type="button" class="btn tab btn-secondary btn-sm" [ngClass]="{ 'active' : activeTab == 'WEB' }"
+            [disabled]="isLoadingTable" (click)="setActiveTab('WEB')">
+            Đặt qua WEB
+          </button>
+          <button type="button" class="btn tab btn-secondary btn-sm" [ngClass]="{ 'active' : activeTab == 'APP' }"
+            [disabled]="isLoadingTable" (click)="setActiveTab('APP')">
+            Đặt qua APP
+          </button>
+        </div>
+        <div class="search-form-container" style="width: unset !important;">
+          <div>
+            <form class="search-form" [formGroup]="searchForm">
+              <mat-form-field class="cb-input" appearance="fill" style="width: 400px;">
+                <mat-icon matPrefix svgIcon="cb_search"></mat-icon>
+                <input matInput type="text" formControlName="textSearch" placeholder="Nhập order" autocomplete="off"
+                  maxlength="250">
+              </mat-form-field>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div>
+        <button type="button" class="btn btn-primary btn-sm me-2" (click)="getLstRooms(true)"
+          [disabled]="isLoadingTable">
+          <mat-icon svgIcon="cb_export"></mat-icon>
+          Xuất báo cáo
+        </button>
+        <button type="button" class="btn btn-success btn-sm me-2" [disabled]="isLoadingTable" (click)="showFilter()">
+          <mat-icon>note_add</mat-icon>
+          Lọc
+        </button>
+        <button type="button" class="btn btn-danger btn-sm" [disabled]="isLoadingTable" (click)="detailRoom('add')">
+          <mat-icon>note_add</mat-icon>
+          Hủy tất cả
+        </button>
+      </div>
+
+      <!-- Filter for Web  -->
+      <ng-container >
+        <div class="filter-form-container"  [hidden]="activeTab == 'APP'">
+          <div class="row mb-3 filter-form-control">
+            <div class="col-form-label fw-bold fs-6">
+              Thời gian lưu trú bắt đầu
+            </div>
+            <div class="col-lg-12 col-12 fv-row">
+              <div class="owl-date-wrap full-width">
+                <input [owlDateTime]="dtFrom" [max]="today" [owlDateTimeTrigger]="dtFrom" placeholder="DD/MM/YYYY"
+                  class="form-control cb-input form-control-sm " formControlName="fromDate" readonly>
+                <mat-icon matPrefix svgIcon="cb_date" color="picker-icon"></mat-icon>
+                <span class="clear-date" matPrefix *ngIf="filterWebForm.value.fromDate"
+                  (click)="filterWebForm.controls.fromDate.reset()">×</span>
+                <owl-date-time #dtFrom [pickerType]="'calendar'"></owl-date-time>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3 filter-form-control">
+            <div class="col-form-label fw-bold fs-6">
+              Thời gian lưu trú kết thúc
+            </div>
+            <div class="col-lg-12 col-12 fv-row">
+              <div class="owl-date-wrap full-width">
+                <input [owlDateTime]="dtTo" [owlDateTimeTrigger]="dtTo" placeholder="Date Time" placeholder="DD/MM/YYYY"
+                  class="form-control cb-input form-control-sm" formControlName="toDate" readonly>
+                <span class="clear-date" matPrefix *ngIf="filterWebForm.value.toDate"
+                  (click)="filterWebForm.controls.toDate.reset()">×</span>
+                <mat-icon matSuffix svgIcon="cb_date" color="picker-icon"></mat-icon>
+                <owl-date-time #dtTo [pickerType]="'calendar'"></owl-date-time>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3 filter-form-control">
+            <div class="col-form-label fw-bold fs-6">
+              Loại phòng
+            </div>
+            <div class="col-lg-12 col-12 fv-row">
+              <ng-select [items]="roomTypes" class="form-select-control form-selection-sm" formControlName="dataSource"
+                bindLabel="name" bindValue="id" placeholder="Chọn loại giao dịch">
+              </ng-select>
+            </div>
+          </div>
+          <div class="row mb-3 filter-form-control">
+            <div class="col-form-label fw-bold fs-6">
+              Trạng thái
+            </div>
+            <div class="col-lg-12 col-12 fv-row">
+              <ng-select [items]="orderStatuses" class="form-select-control form-selection-sm" formControlName="status"
+                bindLabel="name" bindValue="id" placeholder="Chọn trạng thái">
+              </ng-select>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <!-- Filter for App  -->
+      <ng-container>
+        <div class="filter-form-container"  [hidden]="activeTab == 'WEB'">
+          <div class="row mb-3 filter-form-control">
+            <div class="col-form-label fw-bold fs-6">
+              Thời gian lưu trú bắt đầu
+            </div>
+            <div class="col-lg-12 col-12 fv-row">
+              <div class="owl-date-wrap full-width">
+                <input [owlDateTime]="dtFrom2" [max]="today" [owlDateTimeTrigger]="dtFrom2" placeholder="DD/MM/YYYY"
+                  class="form-control cb-input form-control-sm " formControlName="fromDate" readonly>
+                <mat-icon matPrefix svgIcon="cb_date" color="picker-icon"></mat-icon>
+                <span class="clear-date" matPrefix *ngIf="filterAppForm.value.fromDate"
+                  (click)="filterAppForm.controls.fromDate.reset()">×</span>
+                <owl-date-time #dtFrom2 [pickerType]="'calendar'"></owl-date-time>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3 filter-form-control">
+            <div class="col-form-label fw-bold fs-6">
+              Thời gian lưu trú kết thúc
+            </div>
+            <div class="col-lg-12 col-12 fv-row">
+              <div class="owl-date-wrap full-width">
+                <input [owlDateTime]="dtTo2" [owlDateTimeTrigger]="dtTo2" placeholder="Date Time" placeholder="DD/MM/YYYY"
+                  class="form-control cb-input form-control-sm" formControlName="toDate" readonly>
+                <span class="clear-date" matPrefix *ngIf="filterAppForm.value.toDate"
+                  (click)="filterAppForm.controls.toDate.reset()">×</span>
+                <mat-icon matSuffix svgIcon="cb_date" color="picker-icon"></mat-icon>
+                <owl-date-time #dtTo2 [pickerType]="'calendar'"></owl-date-time>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3 filter-form-control">
+            <div class="col-form-label fw-bold fs-6">
+              Loại phòng
+            </div>
+            <div class="col-lg-12 col-12 fv-row">
+              <ng-select [items]="roomTypes" class="form-select-control form-selection-sm" formControlName="dataSource"
+                bindLabel="name" bindValue="id" placeholder="Chọn loại giao dịch">
+              </ng-select>
+            </div>
+          </div>
+          <div class="row mb-3 filter-form-control">
+            <div class="col-form-label fw-bold fs-6">
+              Trạng thái
+            </div>
+            <div class="col-lg-12 col-12 fv-row">
+              <ng-select [items]="orderStatuses" class="form-select-control form-selection-sm" formControlName="status"
+                bindLabel="name" bindValue="id" placeholder="Chọn trạng thái">
+              </ng-select>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+    </div>
+
+
+  </div>
+  <div [ngStyle]="{ 'height': (toolbarHeight + LAYOUT_CONFIG.STICKY_SPACE ) + 'px' }" class="toolbar-space"> &nbsp;
+  </div>
+  
+  
+  <div [hidden]="activeTab == 'WEB'" > 
+    <app-list-app-orders></app-list-app-orders>
+  </div>
+  <div [hidden]="activeTab == 'APP'" > 
+    <app-list-web-orders></app-list-web-orders>
+  </div>
+</div>

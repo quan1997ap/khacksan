@@ -1,0 +1,42 @@
+
+<div *ngFor="let app of settingForObjects" class="app">
+    <div class="app-name">{{app}}</div>
+    <div class="groups">
+        <div *ngFor="let group of permissionsSetting[app].permGroups" class="group">
+            <div class="group-info">
+                <div class="group-name">
+                    {{ group.groupName }}
+                    <mat-icon class="resource-expand-icon" (click)="group.isExpand = !group.isExpand"
+                        [class.down]="group.isExpand">play_arrow</mat-icon>
+                </div>
+            </div>
+            <div class="resources" *ngIf="group.isExpand">
+                <div *ngFor="let resource of permissionsSetting[app].resources | filterResource:group.groupName "
+                    class="resource">
+                    <div class="resource-name">
+                        <mat-checkbox [checked]="resource.selectedAll"
+                            [indeterminate]="somePermsCheck(app, group, resource.resource)"
+                            (change)="checkAllResourcePerms($event.checked, app, group, resource)">
+                        </mat-checkbox>
+                        <span class="label" matTooltip="{{ resource.resource }}" [matTooltipPosition]="'below'"
+                            [matTooltipShowDelay]="200">
+                            {{ resource.resource }}
+                        </span>
+                    </div>
+                    <div class="permissions">
+                        <div class="permission"
+                            *ngFor="let permission of permissions |  filterPerms:app:group.groupName:resource.resource  ">
+                            <mat-checkbox [(ngModel)]="permission.selected"
+                                (ngModelChange)="updateAllResourcePermsChecked(app, group, resource)">
+                            </mat-checkbox>
+                            <span class="label" matTooltip="{{ permission.name  }}" [matTooltipPosition]="'below'"
+                                [matTooltipShowDelay]="200">
+                                {{ permission.name }} - {{ permission.code }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

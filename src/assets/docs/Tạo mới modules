@@ -1,0 +1,7 @@
+1. thêm module mới vào src\app\modules
+2. Thêm module ->  src\app\pages\routing.ts
+3. Thêm vào menu -> src\app\_metronic\layout\components\aside\aside-menu\menu.ts
+
+
+2. Phân quyền
+ - getAndSetUserAuthInfo() : Lấy thông tin auth mỗi khi vào app

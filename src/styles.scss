@@ -1,0 +1,22 @@
+/* Angular material */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+/* You can add global styles to this file, and also import other style files */
+@import "./assets/sass/style";
+
+// Replace above style with this SCSS file to enable dark mode styles
+//@import "./assets/sass/style.dark";
+
+@import "./assets/sass/style.angular.scss";
+// @import "~@ng-select/ng-select/themes/material.theme.css";
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+// Datepicker
+@import '~@angular/cdk/overlay-prebuilt.css';
+@import "~@danielmoncada/angular-datetime-picker/assets/style/picker.min.css";
+
+.kt_activities_toggle:hover {
+   background-color: rgba(96, 96, 97, 0.24);
+}
+html, body { height: 100%;   scroll-behavior: smooth; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

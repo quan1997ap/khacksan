@@ -1,0 +1,27 @@
+//
+// Theme style
+//
+
+// Mode
+$mode: default;
+
+// Initialize
+@import "init";
+
+// Components
+@import "./core/components/components";
+@import "components/components";
+
+// Layout
+@import "layout/layout";
+@import "./core/layout/docs/layout";
+
+// Toastr
+@import '~ngx-toastr/toastr';
+
+// ngx-multiple-dates
+@import 'ngx-multiple-dates/prebuilt-themes/indigo-pink.css';
+
+
+// Custom
+@import "custom.scss";

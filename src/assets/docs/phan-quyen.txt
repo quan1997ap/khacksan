@@ -1,0 +1,2 @@
+giao dịch viên => Hiển thị ALL
+kiểm soát viên => Được quyền Approve

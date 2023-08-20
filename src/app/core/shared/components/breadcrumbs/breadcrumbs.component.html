@@ -1,0 +1,56 @@
+<ng-container *ngIf="breadcrumbConfigs && breadcrumbConfigs.length">
+
+    <ul class="breadcrumb" *ngIf="(type !== 'truncation') || ( type == 'truncation' && breadcrumbConfigs.length <= 2)" [ngClass]="{
+        'long-wrap': type == 'long-wrap',
+        'long': type == 'long'
+      }">
+        <li *ngFor="let breadcrumb of breadcrumbConfigs; let i = index;">
+            <ng-container>
+                <mat-icon *ngIf="breadcrumb.icon" svgIcon="{{ breadcrumb.icon }}" color="primary" class="small breadcrumb-icon"></mat-icon>
+                <a [routerLink]="breadcrumb.url" *ngIf="breadcrumb.url" routerLinkActive="router-link-active">
+                  {{ breadcrumb.label }}
+                </a>
+                <span *ngIf="!breadcrumb.url" routerLinkActive="router-link-active">
+                  {{ breadcrumb.label }}
+                </span>
+                <span class="separate-character">
+                  {{separateCharacter}}
+                </span>
+            </ng-container>
+        </li>
+    </ul>
+
+    <ul class="breadcrumb truncation" *ngIf="type === 'truncation' && breadcrumbConfigs.length > 2 ">
+        <li>
+            <mat-icon *ngIf="breadcrumbConfigs[0].icon" svgIcon="{{ breadcrumbConfigs[0].icon }}" color="primary" class="small breadcrumb-icon"></mat-icon>
+            <a [routerLink]="breadcrumbConfigs[0].url" *ngIf="breadcrumbConfigs[0].url" routerLinkActive="router-link-active">
+                {{ breadcrumbConfigs[0].label }}
+              </a>
+            <span *ngIf="!breadcrumbConfigs[0].url" routerLinkActive="router-link-active">
+                {{ breadcrumbConfigs[0].label }}
+              </span>
+            <span class="separate-character">
+                  {{separateCharacter}}
+              </span>
+        </li>
+        <li>
+            <span>...</span>
+            <span class="separate-character">
+              {{separateCharacter}}
+          </span>
+        </li>
+        <li>
+            <mat-icon *ngIf="breadcrumbConfigs[breadcrumbConfigs.length - 1].icon" svgIcon="{{ breadcrumbConfigs[breadcrumbConfigs.length - 1].icon }}" color="primary" class="small breadcrumb-icon"></mat-icon>
+            <a [routerLink]="breadcrumbConfigs[breadcrumbConfigs.length - 1].url" *ngIf="breadcrumbConfigs[breadcrumbConfigs.length - 1].url" routerLinkActive="router-link-active">
+              {{ breadcrumbConfigs[breadcrumbConfigs.length - 1].label }}
+            </a>
+            <span *ngIf="!breadcrumbConfigs[breadcrumbConfigs.length - 1].url" routerLinkActive="router-link-active">
+              {{ breadcrumbConfigs[breadcrumbConfigs.length - 1].label }}
+            </span>
+            <span class="separate-character">
+                {{separateCharacter}}
+            </span>
+        </li>
+    </ul>
+
+</ng-container>

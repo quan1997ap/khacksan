@@ -1,0 +1,76 @@
+@import "./base-config.scss";
+$border-btn-radius: 6px;
+
+button{
+    font-size: 14px !important;
+    mat-icon{
+        vertical-align: middle;
+        margin-right: 4px !important;
+    }
+}
+.btn.cdk-program-focused{
+    .svg-icon{
+        color: #A1A5B7 !important;
+    }
+}
+.cbbank-btn{
+    padding: 0px 16px;
+    border: none;
+    border-radius: $border-btn-radius;
+    margin: 0 2px;
+    font-size: 14px;
+    min-height: 36px;
+    background-color: $primary !important;
+    color: #fff ;
+    cursor: pointer;
+    // with button only icon
+    &.only-icon{
+        padding: 0px 7px !important;
+        mat-icon{
+            margin-right: 0 !important;
+        }
+    }
+    // button status
+    &.primary{
+        background-color: $primary !important;
+        color: #fff ;
+    }
+    &.secondary{
+        background-color: $secondary !important;
+        color: #fff ;
+    }
+    &.success{
+        background-color: $success !important;
+        color: #fff ;
+    }
+    &.info{
+        background-color: $info !important;
+        color: #fff ;
+    }
+    &.warning{
+        background-color: $warning !important;
+        color: #fff ;
+    }
+    &.danger{
+        background-color: $danger !important;
+        color: #fff ;
+    }
+    &.table-action{
+        background-color: #F4F8FA !important;
+        &:hover{
+            background-color: #eff2f5 !important;
+            svg path{
+                fill: #009ef7 !important; 
+            }
+        }
+    }
+    &:disabled{
+        opacity: 0.8;
+        cursor: not-allowed !important;
+    }
+}
+
+//disable active
+.btn-active-color-primary:active .svg-icon{
+    color: unset !important;
+}

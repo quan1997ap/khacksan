@@ -1,0 +1,45 @@
+<div class="confirm-container">
+  <div class="{{ iconColor+'-color' + ' confirm-icon' }}" *ngIf="iconColor">
+    <mat-icon *ngIf="!isRegistryIcon">{{icon}}</mat-icon>
+    <mat-icon *ngIf="isRegistryIcon" svgIcon="{{icon}}" class="{{iconColor + '-color' }}" ></mat-icon>
+  </div>
+  <div class="confirm-main-title"  *ngIf="data.mainTitle" >
+    {{ data.mainTitle }}
+  </div>
+  <div class="confirm-message" *ngIf="data.message" [innerHTML]="data.message">
+  </div>
+  <div class="confirm-action" *ngIf="actions.length">
+    <!-- Layout 2 buttons -->
+    <div class="center-actions" *ngIf="actions.length == 2">
+      <button
+        *ngFor="let action of actions"
+        class="btn btn-sm"
+        [ngClass]="!action.type ? 'btn-secondary' : 'btn-' + action.type"
+        mat-button
+        (click)="confirm(action)"
+      >
+        <mat-icon class="{{ iconColor }}" *ngIf="action.icon">{{
+          action.icon
+        }}</mat-icon>
+        {{ action.label }}
+      </button>
+    </div>
+
+    <!-- Layout 3 buttons-->
+    <div class="more-action" *ngIf="actions.length == 3">
+      <button
+        *ngFor="let action of actions"
+        class="btn btn-sm"
+        mat-button
+        [ngClass]="!action.type ? 'btn-secondary' : 'btn-' + action.type"
+        (click)="confirm(action)"
+      >
+        <mat-icon class="{{ iconColor }}" *ngIf="action.icon">{{
+          action.icon
+        }}</mat-icon>
+        {{ action.label }}
+      </button>
+    </div>
+
+  </div>
+</div>

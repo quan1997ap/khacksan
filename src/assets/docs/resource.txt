@@ -1,0 +1,6 @@
+1. base theme
+https://bitbucket.org/webcms-ekyc/webcms-ekyc/src/develop/
+
+
+2. working
+https://bitbucket.org/gto-share/cbbank-web/src/master/

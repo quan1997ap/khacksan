@@ -1,0 +1,327 @@
+<div style="background: #fff; padding: 20px;">
+
+  <div style="margin-top: 20px;">
+  </div>
+
+  <h1><br>Highlightjs<br> </h1>
+  <a href="https://github.com/highlightjs/highlight.js/blob/main/SUPPORTED_LANGUAGES.md">
+    https://github.com/highlightjs/highlight.js/blob/main/SUPPORTED_LANGUAGES.md
+  </a>
+
+  <a href="https://www.npmjs.com/package/ngx-highlight-js">https://www.npmjs.com/package/ngx-highlight-js</a>
+
+  <br> <hr>
+
+
+  <h1><br>Buttton<br> </h1>
+
+  <h1>Action</h1>
+  <div style="display: flex;">
+    <!-- Edit -->
+    <button type="button" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" [matTooltipPosition]="'below'"  [matTooltipShowDelay]="200" matTooltip="Sửa">
+      <span class="svg-icon svg-icon-3"  [inlineSVG]="'./assets/media/icons/duotune/art/art005.svg'">
+      </span>
+    </button>
+    <!-- Edit -->
+    <button type="button" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" [matTooltipPosition]="'below'" [matTooltipShowDelay]="200" matTooltip="Chi tiết">
+        <span class="svg-icon svg-icon-3" [inlineSVG]="'./assets/media/registry-svg-icon/view.svg'">
+        </span>
+    </button>
+    <!-- Xóa -->
+    <button type="button" class="btn danger-btn btn-icon btn-bg-light btn-active-color-primary btn-sm" [matTooltipPosition]="'below'" [matTooltipShowDelay]="200" matTooltip="Xóa">
+      <span class="svg-icon svg-icon-3"  [inlineSVG]="'./assets/media/icons/duotune/general/gen027.svg'">
+      </span>
+    </button>
+  </div>
+
+  <div class="code-detail">
+    <mat-accordion>
+      <mat-expansion-panel >
+        <mat-expansion-panel-header>
+          Code
+        </mat-expansion-panel-header>
+        <textarea highlight-js [options]="{}" [ngModel]="ExButton.actionBtn"  [lang]="'html'"></textarea>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <br> <hr> <br> 
+
+
+  <h2><br>Buttton Default </h2>
+  <div style="margin-top: 12px;">
+    <button type="button" class="btn btn-secondary"> <i class="socicon-foursquare"></i> secondary </button>
+    <button type="button" class="btn btn-success">Success</button>
+    <button type="button" class="btn btn-danger">Danger</button>
+    <button type="button" class="btn btn-warning">Warning</button>
+    <button type="button" class="btn btn-info">Info</button>
+    <button type="button" class="btn btn-light">Light</button>
+    <button type="button" class="btn btn-dark">Dark</button>
+    <button type="button" class="btn btn-link">Link</button>
+  </div>
+
+  <div class="code-detail">
+    <mat-accordion>
+      <mat-expansion-panel >
+        <mat-expansion-panel-header>
+          Code
+        </mat-expansion-panel-header>
+        <textarea highlight-js [options]="{}" [ngModel]="ExButton.htmlDefault"  [lang]="'html'"></textarea>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <br> <hr> <br> 
+
+
+  <h2>Buttton Custom</h2>
+  <button class="cbbank-btn primary" mat-button>
+    <mat-icon>home</mat-icon> Primary
+  </button>
+  <button class="cbbank-btn secondary" mat-button>secondary</button>
+  <button class="cbbank-btn success" mat-button>success</button>
+  <button class="cbbank-btn info" mat-button>info</button>
+  <button class="cbbank-btn accent" mat-button>Accent</button>
+  <button class="cbbank-btn warning" mat-button>warning</button>
+  <button class="cbbank-btn danger" mat-button disabled>danger</button>
+  <button disabled class="cbbank-btn only-icon warning">
+    <mat-icon>home</mat-icon>
+  </button>
+  <button class="cbbank-btn primary only-icon" mat-button>
+    <mat-icon svgIcon="cb_filter"></mat-icon>
+  </button>
+
+  <div class="code-detail">
+    <mat-accordion>
+      <mat-expansion-panel >
+        <mat-expansion-panel-header>
+          Code
+        </mat-expansion-panel-header>
+        <textarea highlight-js [options]="{}" [ngModel]="ExButton.htmlCustom"  [lang]="'html'"></textarea>
+
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <br> <hr> <br> 
+
+
+  <h1> Input </h1>
+  <!-- Search -->
+  <form class="search-form" [formGroup]="searchForm">
+    <mat-form-field class="cb-input input-with-underline" appearance="fill">
+      <input matInput type="text" formControlName="textSearch" placeholder="Search">
+      <mat-icon matSuffix svgIcon="cb_search"></mat-icon>
+    </mat-form-field>
+  </form>
+  <!-- OutLine -->
+  <div style="width: 300px; margin-top: 12px;">
+    <input type="tel" class="form-control cb-input form-control-sm" placeholder="Phone number"/>
+  </div>
+  <!-- Solid -->
+  <div  style="width: 300px; margin-top: 12px;">
+    <input type="tel" class="form-control cb-input form-control-sm form-control-solid" placeholder="Phone number"/>
+  </div>
+  <!-- Number -->
+  <div  style="width: 300px; margin-top: 12px;">
+    <input class="form-control" type="number" [(ngModel)]="number" style="width:80px;"/>
+  </div>
+  <!-- Textarea -->
+  <div style="width: 300px; margin-top: 12px;">
+    <textarea rows="5" class="form-control cb-input form-control-sm" placeholder="Ghi chú">  </textarea> 
+  </div>
+  <div style="width: 300px; margin-top: 12px;">
+    <textarea rows="5" class="form-control cb-input form-control-sm form-control-solid" placeholder="Ghi chú">  </textarea> 
+  </div>
+
+
+  <div class="code-detail">
+    <mat-accordion>
+      <mat-expansion-panel >
+        <mat-expansion-panel-header>
+          Code
+        </mat-expansion-panel-header>
+        <textarea highlight-js [options]="{}" [ngModel]="ExInput.html"  [lang]="'html'"></textarea>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <br> <hr> <br> 
+
+
+  <h1> Input Selection</h1>
+  <!-- OutLine -->
+  <div style="width: 300px; margin-top: 12px;">
+    <ng-select [items]="items"  class="form-select-control form-selection-sm"  bindLabel="name"  bindValue="id" >
+    </ng-select>
+  </div>
+  <!-- Solid -->
+  <div  style="width: 300px; margin-top: 12px;">
+    <ng-select [items]="items"  class="form-select-control form-selection-sm form-control-solid"  bindLabel="name"  bindValue="id" >
+    </ng-select>
+  </div>
+
+
+  <div class="code-detail">
+    <mat-accordion>
+      <mat-expansion-panel >
+        <mat-expansion-panel-header>
+          Code
+        </mat-expansion-panel-header>
+        <textarea highlight-js [options]="{}" [ngModel]="ExSelect.html"  [lang]="'html'"></textarea>
+        <textarea highlight-js [options]="{}" [ngModel]="ExSelect.js"  [lang]="'typescript'"></textarea>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <br> <hr> <br> 
+
+
+  <h1>Toggle</h1>
+
+  <form class="row" [formGroup]="toggleForm">
+    <div class="col-xl-3">
+        <div class="fs-6 fw-bold mt-2 mb-3">Toggle Input</div>
+    </div>
+    <div class="col-xl-9">
+        <div class="form-check form-switch form-check-custom form-check-solid">
+            <input class="form-check-input" type="checkbox" formControlName="checked" >
+            <label class="form-check-label fw-bold text-gray-400 ms-3" for="status">Active</label>
+        </div>
+    </div>
+  </form>
+
+  <form class="row" [formGroup]="toggleForm">
+    <div class="col-xl-3">
+        <div class="fs-6 fw-bold mt-2 mb-3">Toggle disabled</div>
+    </div>
+    <div class="col-xl-9">
+        <div class="form-check form-switch form-check-custom form-check-solid">
+            <input class="form-check-input" type="checkbox"  checked="checked" disabled >
+            <label class="form-check-label fw-bold text-gray-400 ms-3" for="status">Active</label>
+        </div>
+    </div>
+  </form>
+
+  <div class="row">
+    <div class="col-xl-3">
+        <div class="fs-6 fw-bold mt-2 mb-3">Toggle Input sm</div>
+    </div>
+    <div class="col-xl-9">
+      <label class="form-check form-switch form-check-custom form-check-solid">
+        <input class="form-check-input w-30px h-20px" type="checkbox" value="1" checked="checked" name="notifications">
+        <span class="form-check-label text-muted fs-6">Recuring</span>
+      </label>
+    </div>
+  </div>
+
+  <form class="row" [formGroup]="toggleForm">
+    <div class="col-xl-3">
+        <div class="fs-6 fw-bold mt-2 mb-3">Mat Toggle </div>
+    </div>
+    <div class="col-xl-9">
+        <div class="form-check form-switch form-check-custom form-check-solid">
+          <mat-slide-toggle disableRipple="true">Slide me!</mat-slide-toggle>
+        </div>
+    </div>
+  </form>
+
+  <form class="row" [formGroup]="toggleForm">
+    <div class="col-xl-3">
+        <div class="fs-6 fw-bold mt-2 mb-3">Mat Toggle disabled</div>
+    </div>
+    <div class="col-xl-9">
+      <mat-slide-toggle disableRipple="true" disabled="true">Slide me!</mat-slide-toggle>
+      <mat-slide-toggle disableRipple="true" [checked]="true"  disabled="true">Slide me!</mat-slide-toggle>
+    </div>
+  </form>
+
+
+  <form class="row" [formGroup]="toggleForm">
+    <div class="col-xl-3">
+        <div class="fs-6 fw-bold mt-2 mb-3">Mat Toggle</div>
+    </div>
+    <div class="col-xl-9">
+        <div class="form-check form-switch form-check-custom form-check-solid">
+          <mat-slide-toggle class="sm" disableRipple="true">Slide me!</mat-slide-toggle>
+        </div>
+    </div>
+  </form>
+
+
+  <div class="code-detail">
+    <mat-accordion>
+      <mat-expansion-panel >
+        <mat-expansion-panel-header>
+          Code
+        </mat-expansion-panel-header>
+        <textarea highlight-js [options]="{}" [ngModel]="ExToggle.html"  [lang]="'html'"></textarea>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <br> <hr> <br> 
+
+
+  <h1>Checkbox</h1>
+  <div class="row mb-8" style="margin-bottom: 20px;">
+    <div class="col-xl-3">
+        <div class="fs-6 fw-bold mt-2 mb-3">Checkbox</div>
+    </div>
+    <div class="col-xl-9">
+        <form class="d-flex fw-bold h-100" [formGroup]="checkboxForm">
+            <div class="form-check form-check-custom form-check-solid me-9">
+                <input class="form-check-input" [disabled]="true" type="checkbox" formControlName="unchecked" >
+                <label class="form-check-label ms-3" for="email">Email</label>
+            </div>
+            <div class="form-check form-check-custom form-check-solid">
+                <input class="form-check-input" type="checkbox"  formControlName="checked" >
+                <label class="form-check-label ms-3" for="phone">Phone</label>
+            </div>
+        </form>
+
+        <mat-checkbox class="example-margin" [disabled]="true">Disabled</mat-checkbox> &nbsp;
+        <mat-checkbox class="example-margin" [disabled]="true"  [checked]="true" >Disabled-checked</mat-checkbox> &nbsp;
+        <mat-checkbox class="example-margin" [disabled]="false"  [checked]="true" >Enable-checked</mat-checkbox> &nbsp;
+        <mat-checkbox class="example-margin" [disabled]="false"  [checked]="false" >Enable</mat-checkbox> &nbsp;
+    </div>
+    <br>
+  </div>
+
+  <div class="code-detail" >
+    <mat-accordion>
+      <mat-expansion-panel >
+        <mat-expansion-panel-header>
+          Code
+        </mat-expansion-panel-header>
+        <textarea highlight-js [options]="{}" [ngModel]="ExCheckbox.html"  [lang]="'html'"></textarea>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <br> <hr> <br> 
+
+
+
+  <h1>Slider  - {{rangeValue}} </h1>
+  <br>
+  $green: #00A558 ; <br>
+  $blue: #009ef7; <br>
+  $yellow: #F39C11; <br>
+  $orange: rgb(255, 189, 29); <br>
+  $purple: rgb(144, 19, 254); <br>
+  $red: #DD4B3C; 
+  <br>
+
+  <div class="full-width mat-slider-container" style="width: 300px;" 
+    [ngClass]="rangeValue < 20 ? 'red' : rangeValue < 50 ? 'orange' : 'green' ">
+    <mat-slider [min]="rangeConfig.min" [max]="rangeConfig.max" step="1" [(ngModel)]="rangeValue"></mat-slider>
+  </div>
+
+  <div class="code-detail">
+    <mat-accordion>
+      <mat-expansion-panel >
+        <mat-expansion-panel-header>
+          Code
+        </mat-expansion-panel-header>
+        <textarea highlight-js [options]="{}" [ngModel]="ExSlider.html"  [lang]="'html'"></textarea>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <br> <hr> <br> 
+
+</div>
+

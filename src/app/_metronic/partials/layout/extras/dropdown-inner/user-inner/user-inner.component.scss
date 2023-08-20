@@ -1,0 +1,18 @@
+:host {
+  .show.menu-dropdown > .menu-sub-dropdown,
+  .menu-sub-dropdown.menu.show,
+  .menu-sub-dropdown.show[data-popper-placement] {
+    display: flex;
+    animation: menu-sub-dropdown-animation-fade-in 0.3s ease 1,
+      menu-sub-dropdown-animation-move-up 0.3s ease 1;
+  }
+
+  .user-image{
+    width: 50px;
+    height: unset !important;
+    min-height: 45px;
+    max-height: 100px;
+    background: #f5f8fa;
+    padding: 8px;
+  }
+}

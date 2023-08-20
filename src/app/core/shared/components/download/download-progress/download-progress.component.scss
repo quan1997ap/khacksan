@@ -1,0 +1,16 @@
+:host{
+    .progress-download {
+        display: flex;
+        height: 8px !important;
+        border-radius: 2px !important;
+        max-width: calc( 100% - 40px);
+        margin-top: 4px;
+        margin-bottom: 4px;
+        .progressbar{
+            background-color: #009ef7 !important;
+        }
+        .progress-bar-striped{
+            font-size: 8px;
+        }
+    }
+}

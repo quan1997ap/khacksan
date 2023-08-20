@@ -1,0 +1,42 @@
+:host {
+    .search-form-container {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .filter-form-container {
+        display: flex;
+        justify-content: space-between;
+
+        .filter-form-control {
+            width: 20%;
+        }
+    }
+
+    .p-b-4 {
+        padding-bottom: 8px !important;
+    }
+
+    .status,
+    .sex {
+        padding: 4px 8px;
+        width: fit-content;
+        display: inline-block;
+        border-radius: 4px;
+        min-width: 60px;
+        text-align: center;
+    }
+
+    $avatar-height: 100px;
+
+    .avatar {
+        height: $avatar-height;
+        margin: 8px 0;
+    }
+
+    .long-text {
+        padding-right: 12px;
+        min-height: $avatar-height;
+    }
+}

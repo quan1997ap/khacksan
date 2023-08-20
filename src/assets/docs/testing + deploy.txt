@@ -1,0 +1,5 @@
+1. Run cmd
+npm build
+
+2. Mở folder dist/ekyc/
+run index.html bằng live-server

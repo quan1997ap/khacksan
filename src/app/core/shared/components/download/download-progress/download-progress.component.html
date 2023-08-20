@@ -1,0 +1,10 @@
+<div class="mb-2">
+    <div>Progress</div>
+    <div class="progress-download">
+        <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+            attr.aria-valuenow="{{ percentLoaded}}" aria-valuemin="0" aria-valuemax="100"
+            [ngStyle]="{ width: percentLoaded + '%' }">
+            {{ percentLoaded }} %
+        </div>
+    </div>
+</div>

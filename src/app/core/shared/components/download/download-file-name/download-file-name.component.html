@@ -1,0 +1,24 @@
+<div class="file-name-config-container">
+    <div class="file-name-config-main-title" >
+        Tên file
+    </div>
+    <div>
+        <input type="text" [(ngModel)]="fileName" class="form-control file-name cb-input form-control-sm " />
+    </div>
+    <div class="file-name-config-action" *ngIf="actions.length">
+      <!-- Layout 2 -->
+      <div class="center-actions" *ngIf="actions.length == 2">
+        <button
+          *ngFor="let action of actions"
+          class="btn btn-secondary btn-sm"
+          [ngClass]="'btn-' + action.type"
+          mat-button
+          (click)="confirm(action)"
+        >
+          {{ action.label }}
+        </button>
+      </div>
+  
+    </div>
+  </div>
+  

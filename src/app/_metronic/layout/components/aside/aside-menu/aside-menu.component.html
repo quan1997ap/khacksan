@@ -1,0 +1,67 @@
+<!-- Dashboard -->
+<ng-container *ngFor="let menuItem of menuConfigs">
+  <ng-container [ngSwitch]="menuItem.type">
+
+
+    <!--Line Separator -->
+    <ng-container *ngSwitchCase="'line-separator'">
+      <div class="menu-item">
+        <div class="menu-content">
+          <div class="separator mx-1 my-4"></div>
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- Label -->
+    <ng-container *ngSwitchCase="'label'">
+      <div class="menu-item">
+        <div class="menu-content pt-8 pb-2">
+          <span class="menu-section text-muted text-uppercase fs-8 ls-1">{{menuItem.label}}</span>
+        </div>
+      </div>
+    </ng-container>
+
+     <!-- menu-item - no child -->
+    <ng-container *ngSwitchCase="'menu-item'">
+      <div class="menu-item">
+        <a class="menu-link without-sub" routerLink="{{menuItem.link}}" routerLinkActive="active" 
+        *ngxPermissionsOnly="menuItem.permissions" >
+          <span class="menu-icon">
+            <span class="svg-icon svg-icon-2" inlineSVG="{{menuItem?.inlineSVG}}"></span>
+          </span>
+          <span class="menu-title">{{menuItem.label}}</span>
+        </a>
+      </div>
+    </ng-container>
+
+
+    <!-- menu-accordion -->
+    <ng-container *ngSwitchCase="'menu-accordion'">
+      <div class="menu-item menu-accordion" data-kt-menu-trigger="click">
+        
+        <span class="menu-link" [ngClass]="{'active' : isLinkActive(menuItem.link) }" *ngxPermissionsOnly="menuItem.permissions">
+          <span class="menu-icon">
+            <span class="svg-icon svg-icon-2" inlineSVG="{{menuItem?.inlineSVG}}"></span>
+          </span>
+          <span class="menu-title">{{menuItem.label}}</span>
+          <span class="menu-arrow"></span>
+        </span>
+
+        <div *ngIf="menuItem?.subMenus?.length" class="menu-sub menu-sub-accordion" routerLinkActive="menu-active-bg">
+          <div class="menu-item" *ngFor="let subMenu of menuItem?.subMenus">
+            <a class="menu-link without-sub" 
+              routerLinkActive="active" routerLink="{{subMenu.link}}" 
+              *ngxPermissionsOnly="subMenu.permissions"  >
+              <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+              <span class="menu-title">{{subMenu.label}}</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </ng-container>
+
+    <ng-container *ngSwitchDefault></ng-container>
+    
+  </ng-container>
+</ng-container>

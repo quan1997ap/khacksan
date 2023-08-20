@@ -1,0 +1,10 @@
+<!-- https://stackoverflow.com/questions/53099559/passing-a-formcontrol-to-a-child-component-no-value-accessor-for-form-control -->
+<div class="row mb-4">
+    <label class="col-lg-12 col-form-label fw-bold fs-6">
+        <span>{{editorControlName}}</span>
+    </label>
+    <div class="editor-container">
+        <ckeditor [editor]="Editor" [config]="config" [formControl]="editorControl"  (ready)="onReady($event)"></ckeditor>
+        <validation-message [controlName]="editorControlName" [control]="editorControl"></validation-message>
+    </div>
+</div>

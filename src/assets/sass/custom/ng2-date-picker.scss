@@ -1,0 +1,29 @@
+$day-height: 36px;
+$day-width: 36px;
+$month-width: 36px;
+
+dp-day-calendar.dp-material .dp-calendar-weekday,
+dp-day-calendar.dp-material .dp-calendar-day{
+    width: $day-width !important;
+    height: $day-height !important;
+    margin: 1px 1px;
+}
+dp-day-calendar.dp-material .dp-calendar-weekday{
+    height: $day-height !important;
+    width: $day-width !important;
+    line-height: $day-height !important;
+}
+.dp-material.dp-popup{
+    margin-top: 4px;
+}
+
+dp-calendar-nav.dp-material .dp-calendar-nav-container{
+    border-bottom: none !important;
+    height: $day-height !important;
+    border: 1px solid #E0E0E0;
+}
+
+dp-month-calendar .dp-calendar-month{
+    margin-bottom: 4px;
+    margin-top: 4px;
+}

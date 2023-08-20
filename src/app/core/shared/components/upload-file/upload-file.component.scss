@@ -1,0 +1,49 @@
+:host{
+    .lst-files{
+        display: flex;
+        overflow: auto;
+        justify-content: flex-start;
+        .file-uploaded{
+            display: flex;
+            justify-content:  flex-start;
+            align-items: center;
+            position: relative;
+            &:not(:last-child){
+                margin-right: 16px;
+            }
+            cursor: pointer;
+            border-radius: 8px;
+            background-color: #f5f8fa;
+            cursor: pointer;
+            background-size: contain;
+            background-position: center center;
+            background-repeat: no-repeat;
+            padding: 12px;
+            background-origin: content-box;
+            .remove-file{
+                position: absolute;
+                right: 8px;
+                top: 8px;
+                cursor: pointer;
+            }
+        }
+    }
+    ::ng-deep{
+        .progress {
+            display: flex;
+            height: 8px !important;
+            border-radius: 2px !important;
+            max-width: calc( 100% - 40px);
+            margin-top: 8px;
+            .progressbar{
+                background-color: #009ef7 !important;
+            }
+            .progress-bar-striped{
+                font-size: 8px;
+            }
+        }
+    }
+    popper-content{
+        z-index: 1;
+    }
+}

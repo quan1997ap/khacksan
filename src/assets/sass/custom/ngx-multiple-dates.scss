@@ -1,0 +1,42 @@
+.multiple-dates-wrap{
+    .mat-form-field{
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        .mat-form-field-underline{
+            display: none;
+        }
+        .mat-form-field-wrapper{
+            padding-bottom: 0 !important;
+        }
+        .mat-form-field-infix{
+            padding: 0 0 12px 12px !important;
+        }
+        .mat-form-field-flex{
+            display: flex;
+            align-items: center;
+            flex-direction: row-reverse;
+        }
+        .mat-datepicker-toggle{
+            &>button{
+                width: 26px;
+                height: 26px;
+                margin-right: 4px;
+                svg{
+                    font-size: 26px;
+                    color: #757575;
+                }
+            }
+        }
+    }
+}
+
+
+.mat-calendar-body-cell.selected .mat-calendar-body-cell-content,
+.mat-calendar-body-cell.selected .mat-calendar-body-cell-content:not(.disabled){
+    color: #fff !important;
+    background-color: #009EF7 !important;
+}
+.mat-calendar-body-cell-content{
+    font-size: 14px !important;
+}

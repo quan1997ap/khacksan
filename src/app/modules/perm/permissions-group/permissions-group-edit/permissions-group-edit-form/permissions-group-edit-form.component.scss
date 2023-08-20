@@ -1,0 +1,9 @@
+// Component must full with, full height
+:host{
+    height: 100%;
+    width: 100%;
+    .col-form-label{
+        padding-top: calc(0.15rem + 1px) !important;
+        padding-bottom: calc(0.15rem + 1px) !important;
+    }
+}

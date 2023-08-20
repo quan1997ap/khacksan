@@ -1,0 +1,132 @@
+<form class="dialog-full-parent" [formGroup]="editForm">
+    <div mat-dialog-title class="dialog-header">
+        <mat-toolbar>
+            <span>
+                {{
+                !data.news ? 'Thêm mới loại phòng'
+                : data.action === 'edit' ? 'Chỉnh sửa loại phòng' : 'Chi tiết loại phòng'
+                }}
+            </span>
+            <span class="fx-spacer"></span>
+            <button mat-icon-button class="dialog-close" (click)="close()">
+                <mat-icon mat-list-icon>close</mat-icon>
+            </button>
+        </mat-toolbar>
+    </div>
+
+    <mat-dialog-content class="dialog-content">
+        <div class="row mb-4">
+            <label class="col-md-4 col-lg-3 col-form-label fw-bold fs-6">
+                <span class="required">Tên loại phòng</span>
+            </label>
+            <div class="col-md-8 col-lg-9 fv-row">
+                <input type="text" formControlName="name" class="form-control cb-input form-control-sm " />
+                <validation-message [controlName]="'Tên loại phòng'"
+                    [control]="editForm.get('name')"></validation-message>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <label class="col-md-4 col-lg-3 col-form-label fw-bold fs-6">
+                <span class="required">Giá phòng</span>
+            </label>
+            <div class="col-md-8 col-lg-9 fv-row">
+                <input type="number" formControlName="roomcount" class="form-control cb-input form-control-sm" [min]="1"
+                    [max]="1000" [numberType]="'integer'" minMax />
+                <validation-message [controlName]="'Giá phòng'"
+                    [control]="editForm.get('roomcount')"></validation-message>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <label class="col-md-4 col-lg-3 col-form-label fw-bold fs-6">
+                <span class="required">Giá phòng</span>
+            </label>
+            <div class="col-md-8 col-lg-9 fv-row">
+                <input type="text" formControlName="maxLoanAmount" class="form-control cb-input form-control-sm"
+                    mask="separator.0" thousandSeparator="." separatorLimit="{{SEPARATOR_LIMIT}}" />
+                <validation-message [controlName]="'Giá phòng'"
+                    [control]="editForm.get('roomcount')"></validation-message>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <label class="col-md-4 col-lg-3 col-form-label fw-bold fs-6">
+                <span class="required">Diện tích</span>
+            </label>
+            <div class="col-md-8 col-lg-9 fv-row">
+                <input type="number" formControlName="roomcount" class="form-control cb-input form-control-sm" [min]="1"
+                    [max]="1000" [numberType]="'integer'" minMax />
+                <validation-message [controlName]="'Diện tích'"
+                    [control]="editForm.get('roomcount')"></validation-message>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <label class="col-md-4 col-lg-3 col-form-label fw-bold fs-6">
+                <span class="required">Số lượng giường</span>
+            </label>
+            <div class="col-md-8 col-lg-9 fv-row">
+                <input type="number" formControlName="roomcount" class="form-control cb-input form-control-sm" [min]="1"
+                    [max]="1000" [numberType]="'integer'" minMax />
+                <validation-message [controlName]="'Số lượng giường'"
+                    [control]="editForm.get('roomcount')"></validation-message>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <label class="col-md-4 col-lg-3 col-form-label fw-bold fs-6">
+                <span class="required">Sức chứa tối đa</span>
+            </label>
+            <div class="col-md-8 col-lg-9 fv-row">
+                <input type="number" formControlName="roomcount" class="form-control cb-input form-control-sm" [min]="1"
+                    [max]="1000" [numberType]="'integer'" minMax />
+                <validation-message [controlName]="'Sức chứa tối đa'"
+                    [control]="editForm.get('roomcount')"></validation-message>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <label class="col-md-4 col-lg-3 col-form-label fw-bold fs-6">
+                <span class="required">Dịch vụ đi kèm</span>
+            </label>
+            <div class="col-md-8 col-lg-9 fv-row">
+                <ng-select [items]="services" class="form-select-control form-selection-sm" [bindLabel]="'name'"
+                    [bindValue]="'id'" formControlName="interestPayMethod" [searchable]="true">
+                </ng-select>
+                <validation-message [controlName]="'Dịch vụ đi kèm'"
+                    [control]="editForm.get('roomcount')"></validation-message>
+            </div>
+        </div>
+
+        <app-upload-img [title]="'Ảnh thumbnail'" formControlName="homeAvatar"></app-upload-img>
+        <app-upload-img [title]="'Ảnh bổ sung'" formControlName="homeAvatar"></app-upload-img>
+
+        <app-editor [editorControl]="editForm.controls['detail']" [editorControlName]="'Mô tả phòng'"> </app-editor>
+
+
+        <!-- <div class="row mb-6">
+          <label class="col-md-4 col-lg-3 col-form-label fw-bold fs-6">
+              <span class="required">Trạng thái</span>
+          </label>
+          <div class="col-md-8 col-lg-9 fv-row" style="padding-top: calc(0.5rem + 1px);">
+              <div class="form-check form-switch form-check-custom form-check-solid">
+                  <input formControlName="status"  class="form-check-input" type="checkbox">
+                  &nbsp;&nbsp;
+                  <div *ngIf="editForm.controls['status'].value == true" class="status success-color" > Hiển thị </div>
+                  <div *ngIf="editForm.controls['status'].value == false" class="status secondary-color" > Ẩn </div>
+              </div> 
+          </div>
+      </div> -->
+    </mat-dialog-content>
+
+
+
+    <mat-dialog-actions class="dialog-footer" *ngIf="['add','edit'].includes(data.action)">
+        <button type="button" class="btn btn-secondary btn-sm" (click)="close()">Quay lại</button>
+        <div class="cb-spacer"></div>
+        <button type="button" class="btn btn-primary btn-sm" (click)="save()">
+            Lưu lại
+        </button>
+    </mat-dialog-actions>
+</form>

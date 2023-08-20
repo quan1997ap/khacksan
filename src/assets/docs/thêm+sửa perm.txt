@@ -1,0 +1,38 @@
+Luồng 
+1. Tạo danh sách group perm ( tên các module quản lý. Hỗ trợ hiển thị )
+2. Thêm mới perm => gán vào group
+3. Tạo mới Role => add perm vào Role
+4. Gán tài khoản với role
+
+
+
+Code
+
+1. Lazyload module
+    import { NgxPermissionsModule } from 'ngx-permissions';
+
+  imports: [
+    ...
+    NgxPermissionsModule.forChild(),
+  ],
+
+2. Routing module
+
+  {
+    path: 't&c',
+    canActivate: [NgxPermissionsGuard],
+    data: {
+      breadcrumb: [
+        { label: 'Quản lý điều khoản và điều kiện' }
+      ],
+      permissions: {
+        only: [PERMISSIONS.terms_and_conditions['terms_and_conditions:read']],
+        redirectTo: 'error/403'
+      }
+    },
+    component: TermsAndConditionListComponent
+  },
+
+3. Component
+
+<div *ngxPermissionsOnly="PERMISSIONS.terms_and_conditions['terms_and_conditions:delete']" >  Show </div>

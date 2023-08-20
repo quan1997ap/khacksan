@@ -1,0 +1,27 @@
+.ck-body-wrapper{
+    display: none;
+}
+
+$toolbar-color: #5e6278;
+
+p, div, a, span, ul, li, input {
+    font-size: 15px;
+}
+
+.ql-toolbar.ql-snow{
+    .ql-stroke{
+        stroke: $toolbar-color;
+    }
+    .ql-fill{
+        fill: $toolbar-color;
+    }
+    &>span{
+        margin-top: 6px;
+        margin-bottom: 6px;
+    }
+}
+
+.editor-container{
+    height: fit-content;
+    overflow: auto;
+}

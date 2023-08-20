@@ -1,0 +1,55 @@
+
+// Component must full with, full height
+:host{
+    height: 100%;
+    width: 100%;
+}
+
+
+/* Other*/
+
+:host{
+    .img-30-percent{
+        width: 30%;
+        min-height: 160px;
+    }
+    
+    .img-50-percent{
+        width: 49%;
+        min-height: 160px;
+    }
+    
+    .img-100-percent{
+        width: 100%;
+        min-height: 160px;
+    }
+    .lst-images{
+        display: flex;
+        overflow: auto;
+        justify-content: space-between;
+        .user-image{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &:not(:last-child){
+                margin-right: 16px;
+            }
+            cursor: pointer;
+            border-radius: 8px;
+            background-color: #f5f8fa;
+            cursor: pointer;
+            min-height: 300px;
+            background-size: contain;
+            background-position: center center;
+            background-repeat: no-repeat;
+            padding: 12px;
+            background-origin: content-box;
+            .no-img{
+                width: 60%;
+                margin: 0 auto;
+                display: block;
+                max-width: 200px;
+            }
+        }
+    }
+}

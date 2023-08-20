@@ -1,0 +1,30 @@
+<div class="listing-container">
+    <!-- listing-page-sticky-header  +  toolbar-space: 60= 2*30 (padding page) -->
+    <div id="kt_toolbar" class="toolbar">
+        <div class="page-sticky-header" 
+            [ngStyle]="{ 
+                'height': showForm ? 'unset' : toolbarHeight + 'px' , 
+                'min-height': showForm ? toolbarHeight + 'px' : 'unset', 
+                'overflow': toolbarHeight == toolbarHeightFull ? 'inherit' : 'hidden' 
+            }">
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary btn-sm me-2" (click)="showEditForm()" >
+                   {{ showForm ? 'Thu nhỏ' : 'Mở rộng' }}
+                   <mat-icon> {{ showForm ? 'keyboard_arrow_up': 'keyboard_arrow_down'  }} </mat-icon>
+                </button>
+                <div>
+                    <button type="button" class="btn btn-secondary btn-sm me-2" (click)="close()" >Quay lại</button>
+                    <button type="button" class="btn btn-primary btn-sm" [disabled]="groupConfigForm.permGroupForm.invalid"  (click)="savePermissionGroup()" >
+                      Lưu lại
+                    </button>
+                </div>
+            </div>
+            <div>
+                <app-permissions-group-edit-form #groupConfigForm></app-permissions-group-edit-form>
+            </div>
+        </div>
+      </div>
+      <div [ngStyle]="{ 'height': (toolbarHeight + LAYOUT_CONFIG.STICKY_SPACE ) + 'px' }" class="toolbar-space"> &nbsp;
+      </div>
+      <app-permissions-group-edit-perms #groupConfigPerms></app-permissions-group-edit-perms>
+</div>

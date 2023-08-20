@@ -1,0 +1,21 @@
+1. user-inner.component.ts
+
+    const languages = [
+    {
+        lang: 'vi',
+        name: 'Viet Nam',
+        flag: './assets/media/flags/vietnam.svg',
+    }
+    ]
+
+2. Tạo mới file vi.ts
+    src\app\modules\i18n\vocabs\vi.ts
+
+3. app.component.ts
+    import {locale as viLang} from './modules/i18n/vocabs/vi';
+    this.translationService.loadTranslations(viLang);
+
+4. translation.service.ts
+    this.translate.addLangs(['en', 'vi']);
+
+    this.translate.setDefaultLang('vi');

@@ -1,0 +1,75 @@
+$breadcrumb-color: #848792;
+$breadcrumb-active-color: #1a77c7 !important;
+$height-item: 28px; // = 2 * $font-size
+.d-none {
+    display: none !important;
+}
+
+@mixin baseTextStyle {
+    color: $breadcrumb-color;
+    white-space: nowrap;
+}
+
+.breadcrumb {
+    background: none;
+    width: fit-content;
+    display: block;
+    margin: 0;
+    display: flex;
+    padding-left: 0;
+    width: 100%;
+    flex-wrap: wrap;
+    &.long {
+        overflow: auto;
+        flex-wrap: nowrap;
+    }
+    &.long-wrap {
+        overflow: auto;
+        flex-wrap: wrap;
+    }
+    &.truncation {
+        overflow: auto;
+        flex-wrap: nowrap;
+    }
+    a {
+        @include baseTextStyle;
+        &:hover {
+            color: $breadcrumb-active-color !important;
+            text-decoration: none;
+        }
+    }
+    span {
+        @include baseTextStyle;
+    }
+    li {
+        list-style: none;
+        float: left;
+        margin: 0 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        line-height: $height-item;
+        height: $height-item;
+        .breadcrumb-icon {
+            font-size: 16px;
+            margin-right: 4px;
+            transform: scale(0.8);
+        }
+        .separate-character {
+            color: $breadcrumb-color;
+            font-size: 16px;
+            margin-left: 8px;
+        }
+        .toggle-collapse {
+            cursor: pointer;
+        }
+        &:last-child {
+            &::after {
+                content: "";
+            }
+            .separate-character {
+                display: none;
+            }
+        }
+    }
+}

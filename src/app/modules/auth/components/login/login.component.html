@@ -1,0 +1,215 @@
+<!--begin::Form-->
+<form
+  class="form w-100 login-form"
+  [formGroup]="loginForm"
+  novalidate="novalidate"
+  id="kt_login_signin_form"
+  (ngSubmit)="submit()"
+>
+  <!--begin::Heading-->
+  <div class="text-center mb-10">
+    <h1 class="text-dark mb-3 d-flex align-items-center justify-content-center">Đăng nhập &nbsp;
+      <img _ngcontent-huc-c325="" alt="Logo" src="assets/media/logos/Logo-CBBank.png" class="h-50px mb-5">
+    </h1>
+    <!-- <div class="text-gray-400 fw-bold fs-4">
+      New Here?
+      <a
+        routerLink="/auth/registration"
+        id="kt_login_signup"
+        class="link-primary fw-bolder"
+        >{{ "AUTH.GENERAL.SIGNUP_BUTTON" | translate }}</a
+      >
+    </div> -->
+  </div>
+  <!--end::Heading-->
+
+  <!-- begin::Alert info-->
+  <ng-container *ngIf="!hasError">
+    <div class="mb-10 bg-light-info p-6 rounded">
+      <div class="text-info">
+        Bạn phải nhập tài khoản và mật khẩu
+      </div>
+    </div>
+  </ng-container>
+  <!-- end::Alert info-->
+
+  <!-- begin::Alert error-->
+  <ng-container *ngIf="hasError">
+    <div class="mb-lg-15 alert alert-danger">
+      <div class="alert-text font-weight-bold">
+        {{errMessage}}
+      </div>
+    </div>
+  </ng-container>
+  <!-- end::Alert error-->
+
+  <!--begin::Form group-->
+  <div class="fv-row mb-10">
+    <label class="form-label fs-6 fw-bolder text-dark">Tài khoản</label>
+    <input
+      class="form-control form-control-lg "
+      name="email"
+      formControlName="email"
+      autocomplete="off"
+      [ngClass]="{
+        'is-invalid': loginForm.controls['email'].invalid,
+        'is-valid': loginForm.controls['email'].valid
+      }"
+    />
+    <ng-container
+      [ngTemplateOutlet]="formError"
+      [ngTemplateOutletContext]="{
+        validation: 'required',
+        message: 'Bạn cần điền tên đăng nhập',
+        control: loginForm.controls['email']
+      }"
+    ></ng-container>
+    <ng-container
+      [ngTemplateOutlet]="formError"
+      [ngTemplateOutletContext]="{
+        validation: 'email',
+        message: 'Tên đăng nhập không hợp lệ',
+        control: loginForm.controls['email']
+      }"
+    ></ng-container>
+    <ng-container
+      [ngTemplateOutlet]="formError"
+      [ngTemplateOutletContext]="{
+        validation: 'minLength',
+        message: 'Tên đăng nhập phải có ít nhất 3 kí tự',
+        control: loginForm.controls['email']
+      }"
+    ></ng-container>
+    <ng-container
+      [ngTemplateOutlet]="formError"
+      [ngTemplateOutletContext]="{
+        validation: 'maxLength',
+        message: 'Tên đăng nhập có tối đa 360 kí tự',
+        control: loginForm.controls['email']
+      }"
+    ></ng-container>
+  </div>
+  <!--end::Form group-->
+
+  <!--begin::Form group-->
+  <div class="fv-row mb-10">
+    <div class="d-flex justify-content-between mt-n5">
+      <div class="d-flex flex-stack mb-2" style="width: 100%;">
+        <label class="form-label fw-bolder text-dark fs-6 mb-0">Mật khẩu</label>
+        <!-- <a
+          routerLink="/auth/forgot-password"
+          class="link-primary fs-6 fw-bolder"
+          id="kt_login_forgot"
+          [style.margin-left]="'5px'"
+        >
+          Forgot Password ?
+        </a> -->
+      </div>
+    </div>
+
+    <input
+      class="form-control form-control-lg "
+      type="{{ isShowPwd ? 'text' : 'password' }}"
+      name="password"
+      autocomplete="off"
+      formControlName="password"
+      [ngClass]="{
+        'is-invalid': loginForm.controls['password'].invalid,
+        'is-valid': loginForm.controls['password'].valid
+      }"
+    />
+    <ng-container
+      [ngTemplateOutlet]="formError"
+      [ngTemplateOutletContext]="{
+        validation: 'required',
+        message: 'Bạn cần điền mật khẩu',
+        control: loginForm.controls['password']
+      }"
+    ></ng-container>
+    <ng-container
+      [ngTemplateOutlet]="formError"
+      [ngTemplateOutletContext]="{
+        validation: 'minlength',
+        message: 'Mật khẩu phải có ít nhất 3 kí tự',
+        control: loginForm.controls['password']
+      }"
+    ></ng-container>
+    <ng-container
+      [ngTemplateOutlet]="formError"
+      [ngTemplateOutletContext]="{
+        validation: 'maxLength',
+        message: 'Mật khẩu có tối đa 360 kí tự',
+        control: loginForm.controls['password']
+      }"
+    ></ng-container>
+  </div>
+  <!--end::Form group-->
+
+  <div style=" margin-bottom: 20px; margin-top: -16px; ">
+    <mat-checkbox class="example-margin" (change)="changePwdVisible($event)" >Hiển thị mật khẩu</mat-checkbox>
+  </div>
+  
+  <!--begin::Action-->
+  <div class="text-center">
+    <button
+      type="submit"
+      id="kt_sign_in_submit"
+      class="btn btn-lg btn-primary w-100 mb-5"
+      [disabled]="loginForm.invalid "
+    >
+      <ng-container *ngIf="isLoading$ | async">
+        <span class="indicator-progress" [style.display]="'block'">
+          Vui lòng chờ...
+          <span
+            class="spinner-border spinner-border-sm align-middle ms-2"
+          ></span>
+        </span>
+      </ng-container>
+      <ng-container *ngIf="!(isLoading$ | async)">
+        <span class="indicator-label">Tiếp tục</span>
+      </ng-container>
+    </button>
+
+    <div class="text-center text-muted text-uppercase fw-bolder mb-5"></div>
+
+    <!-- <div class="text-center text-muted text-uppercase fw-bolder mb-5">or</div>
+    <a
+      class="
+        btn btn-flex
+        flex-center
+        btn-light btn-lg
+        w-100
+        mb-5
+        cursor-pointer
+      "
+    >
+      <img
+        class="h-20px me-3"
+        src="./assets/media/svg/brand-logos/google-icon.svg"
+      />
+
+      Continue with Google
+    </a> -->
+
+
+  </div>
+  <!--end::Action-->
+</form>
+<!--end::Form-->
+
+<ng-template
+  #formError
+  let-control="control"
+  let-message="message"
+  let-validation="validation"
+>
+  <ng-container
+    *ngIf="control.hasError(validation) && (control.dirty || control.touched)"
+  >
+    <div class="fv-plugins-message-container danger-color">
+      <span role="alert" >
+        {{ message }}
+      </span>
+    </div>
+  </ng-container>
+</ng-template>

@@ -1,0 +1,24 @@
+:host{
+    .topbar-btn-icon{
+        i{
+            font-size: 18px;
+            color: #181c32;
+            &.red{
+                color: red;
+            }
+            &.blue{
+                color: #009ef7 !important;
+            }
+        }
+    }
+    .sip-button{
+        .dot{
+            width: 8px;
+            height: 8px;
+            border-radius: 4px;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+        }
+    }
+}

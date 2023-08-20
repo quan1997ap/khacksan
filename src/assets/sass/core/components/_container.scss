@@ -1,0 +1,34 @@
+//
+// Container
+//
+
+// Desktop Mode
+@include media-breakpoint-up(lg) {
+	// Containers
+	.container-custom {
+		padding-left: get($container, padding, lg) !important;
+        padding-right: get($container, padding, lg) !important;
+	}
+}
+
+// Tablet & mobile modes
+@include media-breakpoint-down(lg) {
+	.container-custom { 
+		max-width: none;
+		padding-left: get($container, padding, default) !important;
+        padding-right: get($container, padding, default) !important;
+	}
+}
+
+
+@media (min-width: 992px){
+	.container-xxl { 
+		max-width: calc( 100vw - 40px ) !important;
+	}
+}
+
+@media (min-width: 1400px){
+	.container-xxl { 
+		max-width: calc( 100vw - 40px ) !important;
+	}
+}

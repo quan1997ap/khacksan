@@ -1,0 +1,68 @@
+$active-bg: rgb(0 158 247);
+$inactive-bg: #dde7f2;
+
+.mat-disabled .mat-slide-toggle-label{
+    cursor: not-allowed !important;
+}
+/* type input */
+.form-check.form-check-solid{
+    .form-check-input{
+        background-color: $inactive-bg;
+    }
+} 
+
+
+/*Color*/
+.mat-slide-toggle.mat-checked {
+    .mat-slide-toggle-thumb{
+        background-color: #fff;
+    }
+    .mat-slide-toggle-bar{
+        background-color: $active-bg;
+    }
+}
+.mat-slide-toggle-bar {
+    background-color: $inactive-bg;
+}
+// Disable animation when check/uncheck
+.mat-slide-toggle-ripple .mat-ripple-element {
+    background-color: transparent !important;
+}
+
+
+/* Size normal */
+
+.mat-slide-toggle-thumb-container{
+    top: 3px !important;
+    left: 3px !important;
+}
+.mat-slide-toggle-bar {
+    position: relative;
+    width: 44px !important;
+    height: 28px !important;
+    flex-shrink: 0 !important;
+    border-radius: 16px !important;
+}
+.mat-slide-toggle-thumb {
+    height: 22px !important;
+    width: 22px !important;
+}
+
+/* Size small */ 
+mat-slide-toggle.sm{
+    .mat-slide-toggle-bar {
+        position: relative;
+        width: 36px !important;
+        height: 20px !important;
+        flex-shrink: 0 !important;
+        border-radius: 16px !important;
+    }
+    .mat-slide-toggle-thumb-container{
+        top: 2px !important;
+        left: 2px !important;
+    }
+    .mat-slide-toggle-thumb {
+        height: 16px !important;
+        width: 16px !important;
+    }
+}

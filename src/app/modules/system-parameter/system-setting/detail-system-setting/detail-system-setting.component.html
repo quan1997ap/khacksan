@@ -1,0 +1,167 @@
+<form class="dialog-full-parent" [formGroup]="editForm">
+  <div mat-dialog-title class="dialog-header">
+    <mat-toolbar>
+      <span>
+        Chỉnh sửa tham số hệ thống
+      </span>
+      <span class="fx-spacer"></span>
+      <button mat-icon-button class="dialog-close" (click)="close()">
+        <mat-icon mat-list-icon>close</mat-icon>
+      </button>
+    </mat-toolbar>
+  </div>
+
+  <mat-dialog-content class="dialog-content">
+    <ng-container>
+
+      <div class="row mb-4" *ngIf="data.systemSetting?.settingKey == 'uploadFileTypes'">
+        <label class="col-md-4 col-lg-3 col-form-label fw-bold fs-6">
+          <span class="required">Loại file upload </span>
+        </label>
+        <div class="col-md-8 col-lg-9 fv-row">
+          <ng-select [items]="UPLOAD_IMG_TYPES" class="form-select-control form-selection-sm "
+            style="width: 413px;"
+            formControlName="uploadFileTypes" [searchable]="true" [multiple]="true" [closeOnSelect]="false"
+            placeholder="Choose File types">
+          </ng-select>
+          <validation-message [controlName]="'Loại file upload'" [control]="editForm.get('uploadFileTypes')"></validation-message>
+        </div>
+      </div>
+
+      <div class="row mb-4" *ngIf="data.systemSetting?.settingKey == 'pageSizes'">
+        <label class="col-12 col-form-label fw-bold fs-6 d-flex justify-content-between">
+          <span class="required">  Số bản ghi trên trang</span>
+          <button type="button" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm add-btn"
+            style="border-radius: 50%;" [matTooltipPosition]="'below'" [matTooltipShowDelay]="200" matTooltip="Thêm"
+            (click)="addPageSize()">
+            <span class="svg-icon svg-icon-3" [inlineSVG]="'./assets/media/icons/duotune/general/gen035.svg'">
+            </span>
+          </button>
+        </label>
+        <div class="col-12 fv-row">
+          <table class="mb-6 w-100" formArrayName="pageSizes">
+            <tr class="mb-3" *ngFor="let pageSize of pageSizes.controls; let i = index;">
+              <ng-container>
+                <td>
+                  <div class="d-flex align-items-center mb-3">
+                    <span class="control-label" 
+                    style="    white-space: nowrap;
+                    margin-right: 13px;
+                    margin-left: 80px;"> Lựa chọn </span>
+                    <input type="number" [formControlName]="i" class="form-control cb-input form-control-sm" [min]="1"
+                      [max]="1000" [numberType]="'integer'" minMax />
+                    <span style="white-space: nowrap;"> &nbsp; bản ghi / trang </span>
+                  </div>
+                  <div style="padding-left: 150px;">
+                    <validation-message [controlName]="'Lựa chọn'" [control]="pageSizes.at(i)"></validation-message>
+                  </div>
+                </td>
+                <td style="padding-left: 12px;">
+                  <div class="d-flex justify-content-end mb-3">
+                    <button type="button" class="btn danger-btn btn-icon btn-bg-light btn-active-color-primary btn-sm"
+                      [matTooltipPosition]="'below'" [matTooltipShowDelay]="200" matTooltip="Xóa"
+                      (click)="removePageSize(i)">
+                      <span class="svg-icon svg-icon-3"
+                        [inlineSVG]="'./assets/media/icons/duotune/general/gen036.svg'">
+                      </span>
+                    </button>
+                  </div>
+                </td>
+              </ng-container>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="row mb-4" *ngIf="data.systemSetting?.settingKey == 'webTimeout'">
+        <label class="col-md-4 col-lg-3 col-form-label fw-bold fs-6"  style="padding-top: 0;">
+          <span>
+            WEB TIMEOUT 
+            <mat-icon color="warn" [matTooltipPosition]="'above'" [matTooltipShowDelay]="200" matTooltip="Thời gian WEB ngừng truy cập khi không sử dụng">info</mat-icon>
+          </span>
+        </label>
+        <div class="col-md-8 col-lg-9 fv-row position-relative">
+          <input type="number" formControlName="webTimeout"
+            class="form-control cb-input form-control-sm time-input minutes" placeholder="Phút" [min]="0" [max]="1000"
+            [numberType]="'integer'" minMax />
+          <span class="input-append-end">[ Phút ]</span>
+        </div>
+      </div>
+
+      <div class="row mb-4"  *ngIf="data.systemSetting?.settingKey == 'appTimeout'" >
+        <label class="col-md-4 col-lg-3 col-form-label fw-bold fs-6" style="padding-top: 0;">
+          <span>
+            APP TIMEOUT 
+            <mat-icon color="warn" [matTooltipPosition]="'above'" [matTooltipShowDelay]="200" matTooltip="Thời gian APP ngừng truy cập khi không sử dụng">info</mat-icon>
+          </span>
+        </label>
+        <div class="col-md-8 col-lg-9 fv-row position-relative">
+          <input type="number" formControlName="appTimeout"
+            class="form-control cb-input form-control-sm time-input minutes" placeholder="Phút" [min]="0" [max]="1000"
+            [numberType]="'integer'" minMax />
+          <span class="input-append-end">[ Phút ]</span>
+        </div>
+      </div>
+
+
+    </ng-container>
+
+    <ng-container>
+      <div class="row mb-4">
+        <label class="col-md-4 col-lg-3 col-form-label fw-bold fs-6">
+          <span>Người tạo</span>
+        </label>
+        <div class="col-md-8 col-lg-9 fv-row">
+          <input type="text" readonly formControlName="createdBy" class="form-control cb-input form-control-sm " />
+        </div>
+      </div>
+
+      <div class="row mb-4">
+        <label class="col-md-4 col-lg-3 col-form-label fw-bold fs-6">
+          <span>Ngày tạo</span>
+        </label>
+        <div class="col-md-8 col-lg-9 fv-row">
+          <div class="owl-date-wrap full-width">
+            <input [owlDateTime]="dtCreatedAt" placeholder="DD/MM/YYYY" class="form-control cb-input form-control-sm "
+              formControlName="createdAt" readonly>
+            <mat-icon matPrefix svgIcon="cb_date" color="picker-icon"></mat-icon>
+            <owl-date-time #dtCreatedAt [pickerType]="'calendar'"></owl-date-time>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-4">
+        <label class="col-md-4 col-lg-3 col-form-label fw-bold fs-6">
+          <span>Người sửa</span>
+        </label>
+        <div class="col-md-8 col-lg-9 fv-row">
+          <input type="text" readonly formControlName="updatedBy" class="form-control cb-input form-control-sm " />
+        </div>
+      </div>
+
+      <div class="row mb-4">
+        <label class="col-md-4 col-lg-3 col-form-label fw-bold fs-6">
+          <span>Ngày sửa</span>
+        </label>
+        <div class="col-md-8 col-lg-9 fv-row">
+          <div class="owl-date-wrap full-width">
+            <input [owlDateTime]="dtUpdatedAt" placeholder="DD/MM/YYYY" class="form-control cb-input form-control-sm "
+              formControlName="updatedAt" readonly>
+            <mat-icon matPrefix svgIcon="cb_date" color="picker-icon"></mat-icon>
+            <owl-date-time #dtUpdatedAt [pickerType]="'calendar'"></owl-date-time>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </mat-dialog-content>
+
+
+
+  <mat-dialog-actions class="dialog-footer">
+    <button type="button" class="btn btn-secondary btn-sm" (click)="close()">Quay lại</button>
+    <div class="cb-spacer"></div>
+    <button type="button" class="btn btn-primary btn-sm" (click)="save()">
+      Lưu lại
+    </button>
+  </mat-dialog-actions>
+</form>
